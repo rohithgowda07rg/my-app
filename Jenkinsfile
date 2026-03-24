@@ -4,12 +4,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/YOUR_USERNAME/my-app.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean compile'
@@ -30,9 +24,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-
                 sh '''
-
                 echo "Deploying app..."
 
                 mkdir -p /home/ec2-user/app
@@ -42,9 +34,7 @@ pipeline {
                 pkill -f app.jar || true
 
                 nohup java -jar /home/ec2-user/app/app.jar > app.log 2>&1 &
-
                 '''
-
             }
         }
 
